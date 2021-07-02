@@ -1,0 +1,36 @@
+nav h1{
+    font-size: medium;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    font-weight: bold;
+}
+
+section h3{
+    font-size: medium;
+    text-align: center;
+    padding: 5%;
+}
+
+.botoes {
+    text-align: center;
+}
+
+.botao {
+    width: 80%;
+    margin-bottom: 5%;
+    border-style: solid;
+    border-color: black;
+}
+
+@media (min-width: 600px)
+{
+  .conjuntoBotoes
+   {
+
+    width:50%;
+   }
+
+}

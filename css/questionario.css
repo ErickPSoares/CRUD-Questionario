@@ -1,0 +1,72 @@
+nav h1{
+    font-size: medium;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    font-weight: bold;
+}
+
+section h3{
+    font-weight: bold;
+    font-size: medium;
+    text-align: center;
+    padding: 5%;
+}
+.radios{
+    margin-left: 5%;
+    margin-bottom: 2%;
+}
+.pergunta{
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    margin-bottom: 2%;
+}
+.pergunta h6{
+    padding: 2%;
+    text-align: justify;
+}
+
+@media (min-width: 600px)
+{
+    .radios{
+        margin-left: 40%;
+    }
+    .pergunta{
+        width: 50%;
+    }
+    .resultado{
+        width: 50%;
+        margin-left: 25%;
+        margin-bottom: 2%;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 599px)
+{
+    .radios{
+        margin-left: 40%;
+    }
+        .pergunta{
+        width: 90%;
+    }
+    .resultado{
+        width: 90%;
+        margin-left: 25%;
+        margin-bottom: 2%;
+    }
+}
+
+@media (max-width: 400px)
+{
+    .pergunta{
+        width: 90%;
+    }
+    .resultado{
+        width: 90%;
+        margin-left: 5%;
+        margin-bottom: 2%;
+    }
+}
