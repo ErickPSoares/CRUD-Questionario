@@ -1,3 +1,14 @@
+<?php
+    require_once 'C:\xampp\htdocs\ProjetoIntegrador\php\classes\Legenda.php';
+
+    if(isset($_POST['acao']))
+    {
+        $legenda = new Legenda();
+        $legenda->setLegenda($_POST['legenda']);
+        $legenda->insertLegenda($pdo);
+        }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -5,8 +16,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/cadastroGrupo.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/ProjetoIntegrador/css/cadastroGrupo.css">
+    <link rel="stylesheet" href="/ProjetoIntegrador/css/bootstrap.min.css">
     <title>Document</title>
 </head>
 
@@ -19,7 +30,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSite">
             <ul class="navbar-nav">
-                <a href="index.html">
+                <a href="inicial.html">
                   <li class="nav-link" >Página Inicial</li>
                 </a>
                 <a href="cadastroCategoria.html">
@@ -36,17 +47,17 @@
     </nav>
     <section class="cadastro">
         <h3>Cadastrar Grupo</h3>
-        <form class="mr-auto ml-auto">
+        <form class="mr-auto ml-auto" method="post">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Digite aqui" aria-label="Recipient's username"
+                <input type="text" name="legenda" class="form-control" placeholder="Digite aqui" aria-label="Recipient's username"
                     aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">OK</button>
+                    <button class="btn btn-outline-secondary" type="submit" name="acao">OK</button>
                 </div>
             </div>
         </form>
     </section>
-
+    <!--
     <div class="table-responsive-sm tabela">
         <table class="table">
             <thead class="thead-light">
@@ -61,29 +72,30 @@
                     <td>1</td>
                     <td>Mark</td>
                     <td>
-                        <img src="lapis.png" alt="editar" width=16 height=16>
-                        <img src="lixeira.png" alt="editar" width=16 height=16>
+                        <img src="/ProjetoIntegrador/img/lapis.png" alt="editar" width=16 height=16>
+                        <img src="/ProjetoIntegrador/img/lixeira.png" alt="editar" width=16 height=16>
                     </td>
                 </tr>
                 <tr>
                     <td>2</td>
                     <td>Jacob</td>
                     <td>
-                        <img src="lapis.png" alt="editar" width=16 height=16>
-                        <img src="lixeira.png" alt="editar" width=16 height=16>
+                        <img src="/ProjetoIntegrador/img/lapis.png" alt="editar" width=16 height=16>
+                        <img src="/ProjetoIntegrador/img/lixeira.png" alt="editar" width=16 height=16>
                     </td>
                 </tr>
                 <tr>
                     <td>3</td>
                     <td>Larry</td>
                     <td>
-                        <img src="lapis.png" alt="editar" width=16 height=16>
-                        <img src="lixeira.png" alt="editar" width=16 height=16>
+                        <img src="/ProjetoIntegrador/img/lapis.png" alt="editar" width=16 height=16>
+                        <img src="/ProjetoIntegrador/img/lixeira.png" alt="editar" width=16 height=16>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+    -->
 
 
     <script src="js/jquery-3.3.1.slim.min.js"></script>

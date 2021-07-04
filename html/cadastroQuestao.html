@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/cadastroCategoria.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="/ProjetoIntegrador/css/cadastroQuestao.css">
+    <link rel="stylesheet" href="/ProjetoIntegrador/css/bootstrap.min.css">
+    <title>Questões</title>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSite">
             <ul class="navbar-nav">
-                <a href="index.html">
+                <a href="inicial.html">
                   <li class="nav-link" >Página Inicial</li>
                 </a>
                 <a href="cadastroCategoria.html">
@@ -35,7 +35,28 @@
         </div>
     </nav>
     <section class="cadastro">
-        <h3>Cadastrar Categoria</h3>
+        <h3>Cadastrar Questão</h3>
+
+        <div class="form-group formataSelect mr-auto ml-auto">
+            <select class="form-control selecionar" id="exampleFormControlSelect1">
+              <option selected disabled>Categoria</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+        </div>
+
+        <div class="form-group formataSelect mr-auto ml-auto">
+            <select class="form-control selecionar" id="exampleFormControlSelect1">
+              <option selected disabled>Grupo</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+        </div>
+
         <form class="mr-auto ml-auto">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Digite aqui" aria-label="Recipient's username"
@@ -53,32 +74,40 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Categoria</th>
+                    <th scope="col">Grupo</th>
+                    <th scope="col">Descrição</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td>Mark</td>
+                    <td>9 meses - 12 meses</td>
+                    <td>Avaliação cognitivo-social</td>
+                    <td>A criança imita 2 gestos (bate palma, dá tchau, manda beijo)?</td>
                     <td>
-                        <img src="lapis.png" alt="editar" width=16 height=16>
-                        <img src="lixeira.png" alt="editar" width=16 height=16>
+                        <img src="/ProjetoIntegrador/img/lapis.png" alt="editar" width=16 height=16>
+                        <img src="/ProjetoIntegrador/img/lixeira.png" alt="editar" width=16 height=16>
                     </td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>Jacob</td>
+                    <td>9 meses - 12 meses</td>
+                    <td>Avaliação cognitivo-social</td>
+                    <td>A criança sorri quando alguém sorri para ela?</td>
                     <td>
-                        <img src="lapis.png" alt="editar" width=16 height=16>
-                        <img src="lixeira.png" alt="editar" width=16 height=16>
+                        <img src="/ProjetoIntegrador/img/lapis.png" alt="editar" width=16 height=16>
+                        <img src="/ProjetoIntegrador/img/lixeira.png" alt="editar" width=16 height=16>
                     </td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td>Larry</td>
+                    <td>9 meses - 12 meses</td>
+                    <td>Avaliação de coordenação motora fina</td>
+                    <td>A criança consegue fazer uma torre pequena com blocos</td>
                     <td>
-                        <img src="lapis.png" alt="editar" width=16 height=16>
-                        <img src="lixeira.png" alt="editar" width=16 height=16>
+                        <img src="/ProjetoIntegrador/img/lapis.png" alt="editar" width=16 height=16>
+                        <img src="/ProjetoIntegrador/img/lixeira.png" alt="editar" width=16 height=16>
                     </td>
                 </tr>
             </tbody>
