@@ -11,7 +11,8 @@ if (isset($_POST['cadastrar'])) {
 
 if (isset($_POST['atualizar'])) {
     $legenda->setLegenda($_POST['legenda']);
-    $legenda->updateLegenda();
+    $id = $_GET['id'];
+    $legenda->updateLegenda($id);
 }
 ?>
 
@@ -36,16 +37,16 @@ if (isset($_POST['atualizar'])) {
         </button>
         <div class="collapse navbar-collapse" id="navbarSite">
             <ul class="navbar-nav">
-                <a href="inicial.html">
+                <a href="inicial.php">
                     <li class="nav-link">Página Inicial</li>
                 </a>
-                <a href="cadastroCategoria.html">
+                <a href="cadastroCategoria.php">
                     <li class="nav-link">Categorias</li>
                 </a>
-                <a href="cadastroGrupo.html">
+                <a href="cadastroGrupo.php">
                     <li class="nav-link">Grupos</li>
                 </a>
-                <a href="cadastroQuestao.html">
+                <a href="cadastroQuestao.php">
                     <li class="nav-link">Perguntas</li>
                 </a>
             </ul>
@@ -54,29 +55,32 @@ if (isset($_POST['atualizar'])) {
     <section class="cadastro">
         <h3>Cadastrar Grupo</h3>
         <?php
+        if (isset($_GET['acao']) && $_GET['acao'] == "deletar") {
+            $id = $_GET['id'];
+            $legenda->deletaLegenda($id);
+        }
         if (isset($_GET['acao']) && $_GET['acao'] == "editar") {
-            $id = (int)$_GET['id'];
-            $legenda->setIdLegenda($id);
+            $id = $_GET['id'];
             $resultado = $legenda->buscaLegenda($id);
 
         ?>
             <form class="mr-auto ml-auto" method="post">
                 <div class="input-group mb-3">
-                    <input type="text" name="legenda" class="form-control" value="<?php echo $resultado[0] ; ?>" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <input type="text" name="legenda" class="form-control" value="<?php echo $resultado[0]; ?>" aria-label="Recipient's username" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit" name="atualizar">Atualizar</button>
                     </div>
                 </div>
             </form>
-        <?php } else {?>
-        <form class="mr-auto ml-auto" method="post">
-            <div class="input-group mb-3">
-                <input type="text" name="legenda" class="form-control" placeholder="Digite aqui" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit" name="cadastrar">OK</button>
+        <?php } else { ?>
+            <form class="mr-auto ml-auto" method="post">
+                <div class="input-group mb-3">
+                    <input type="text" name="legenda" class="form-control" placeholder="Digite aqui" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" name="cadastrar">OK</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
         <?php } ?>
     </section>
     <div class="table-responsive-sm tabela">
@@ -99,7 +103,7 @@ if (isset($_POST['atualizar'])) {
         <td>
         <form method="get">
         <a href="cadastroGrupo.php?acao=editar&id=' . $value['idLegenda'] . '"><img src="/ProjetoIntegrador/img/lapis.png" alt="editar" width=16 height=16></a>
-        <a href="cadastroGrupo.php?acao=deletar&id=' . $value['idLegenda'] . '"><img src="/ProjetoIntegrador/img/lixeira.png" alt="deletar" width=16 height=16>
+        <a href="cadastroGrupo.php?acao=deletar&id=' . $value['idLegenda'] . '"><img src="/ProjetoIntegrador/img/lixeira.png" alt="deletar" width=16 height=16></a>
         </form>
         </td>
     </tr>';

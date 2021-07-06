@@ -50,12 +50,19 @@ class Legenda extends Conexao
         return $resultado;
     }
 
-    public function updateLegenda()
+    public function updateLegenda($id)
     {
         $legenda = $this->legenda;
-        $idLegenda = $this->idLegenda;
+        $idLegenda = $id;
         $pdo = $this->conexao();
         $sql = $pdo->prepare("UPDATE `legenda` SET legenda = ? WHERE idLegenda = ?");
-        $sql->execute(array($legenda,$idLegenda));
+        $sql->execute(array($legenda, $idLegenda));
+    }
+
+    public function deletaLegenda($id)
+    {
+        $pdo = $this->conexao();
+        $sql = $pdo->prepare("DELETE FROM `legenda` WHERE idLegenda = ?");
+        $sql->execute(array($id));
     }
 }
