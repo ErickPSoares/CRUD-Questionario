@@ -27,7 +27,7 @@ class Legenda extends Conexao
     public function insertLegenda()
     {
         $pdo = $this->conexao();
-        $sql = $pdo->prepare("INSERT INTO `legenda` VALUES (NULL, ?) ");
+        $sql = $pdo->prepare("INSERT INTO `legenda` VALUES (NULL, teste) ");
         $legenda = $this->legenda;
         $sql->execute(array($legenda));
     }

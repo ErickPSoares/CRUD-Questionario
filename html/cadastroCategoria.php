@@ -14,7 +14,6 @@ if (isset($_POST['atualizar'])) {
     $id = $_GET['id'];
     $categoria->updateCategoria($id);
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -102,8 +101,8 @@ if (isset($_POST['atualizar'])) {
         <td>' . $value['categoria'] . '</td>
         <td>
         <form method="get">
-        <a href="cadastroGrupo.php?acao=editar&id=' . $value['idCategoria'] . '"><img src="/ProjetoIntegrador/img/lapis.png" alt="editar" width=16 height=16></a>
-        <a href="cadastroGrupo.php?acao=deletar&id=' . $value['idCategoria'] . '"><img src="/ProjetoIntegrador/img/lixeira.png" alt="deletar" width=16 height=16></a>
+        <a href="cadastroCategoria.php?acao=editar&id=' . $value['idCategoria'] . '"><img src="/ProjetoIntegrador/img/lapis.png" alt="editar" width=16 height=16></a>
+        <a href="cadastroCategoria.php?acao=deletar&id=' . $value['idCategoria'] . '"><img src="/ProjetoIntegrador/img/lixeira.png" alt="deletar" width=16 height=16></a>
         </form>
         </td>
     </tr>';
@@ -113,50 +112,8 @@ if (isset($_POST['atualizar'])) {
         </table>
     </div>
 
- <!--
-    <div class="table-responsive-sm tabela">
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Categoria</th>
-                    <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>
-                        <img src="/ProjetoIntegrador/img/lapis.png" alt="editar" width=16 height=16>
-                        <img src="/ProjetoIntegrador/img/lixeira.png" alt="editar" width=16 height=16>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>
-                        <img src="/ProjetoIntegrador/img/lapis.png" alt="editar" width=16 height=16>
-                        <img src="/ProjetoIntegrador/img/lixeira.png" alt="editar" width=16 height=16>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Larry</td>
-                    <td>
-                        <img src="/ProjetoIntegrador/img/lapis.png" alt="editar" width=16 height=16>
-                        <img src="/ProjetoIntegrador/img/lixeira.png" alt="editar" width=16 height=16>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    -->
-
-
     <script src="js/jquery-3.3.1.slim.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>
-
 </html>

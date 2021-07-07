@@ -1,3 +1,11 @@
+<?php
+
+require_once '../php/model/Questao.php';
+
+$questao = new Questao();
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -19,19 +27,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSite">
             <ul class="navbar-nav">
-                <a href="inicial.html">
-                  <li class="nav-link" >Página Inicial</li>
+                <a href="inicial.php">
+                    <li class="nav-link">Página Inicial</li>
                 </a>
-                <a href="cadastroCategoria.html">
-                  <li class="nav-link">Categorias</li>
+                <a href="cadastroCategoria.php">
+                    <li class="nav-link">Categorias</li>
                 </a>
-                <a href="cadastroGrupo.html">
-                  <li class="nav-link">Grupos</li>
+                <a href="cadastroGrupo.php">
+                    <li class="nav-link">Grupos</li>
                 </a>
-                <a href="cadastroQuestao.html">
-                  <li class="nav-link">Perguntas</li>
-                </a>       
-              </ul>
+                <a href="cadastroQuestao.php">
+                    <li class="nav-link">Perguntas</li>
+                </a>
+            </ul>
         </div>
     </nav>
     <section class="cadastro">
@@ -39,28 +47,31 @@
 
         <div class="form-group formataSelect mr-auto ml-auto">
             <select class="form-control selecionar" id="exampleFormControlSelect1">
-              <option selected disabled>Categoria</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+                <option selected disabled>Categoria</option>
+                <?php
+                $resultado = $questao->selectCategoria();
+                foreach ($resultado as $key => $value) {
+                    echo '<option>' . $value['categoria'] . '</option>';
+                }
+                ?>
             </select>
         </div>
 
         <div class="form-group formataSelect mr-auto ml-auto">
             <select class="form-control selecionar" id="exampleFormControlSelect1">
-              <option selected disabled>Grupo</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+                <option selected disabled>Grupo</option>
+                <?php
+                $resultado = $questao->selectLegenda();
+                foreach ($resultado as $key => $value) {
+                    echo '<option>' . $value['legenda'] . '</option>';
+                }
+                ?>
             </select>
         </div>
 
         <form class="mr-auto ml-auto">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Digite aqui" aria-label="Recipient's username"
-                    aria-describedby="basic-addon2">
+                <input type="text" class="form-control" placeholder="Digite aqui" aria-label="Recipient's username" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button">OK</button>
                 </div>
