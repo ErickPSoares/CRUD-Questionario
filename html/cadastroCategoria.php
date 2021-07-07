@@ -1,4 +1,21 @@
+<?php
 
+require_once '../php/model/Categoria.php';
+
+$categoria = new Categoria();
+
+if (isset($_POST['cadastrar'])) {
+    $categoria->setCategoria($_POST['categoria']);
+    $categoria->insertCategoria();
+}
+
+if (isset($_POST['atualizar'])) {
+    $categoria->setCategoria($_POST['categoria']);
+    $id = $_GET['id'];
+    $categoria->updateCategoria($id);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -8,7 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/ProjetoIntegrador/css/cadastroCategoria.css">
     <link rel="stylesheet" href="/ProjetoIntegrador/css/bootstrap.min.css">
-    <title>Document</title>
+    <title>Categoria</title>
 </head>
 
 <body>
@@ -20,16 +37,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSite">
             <ul class="navbar-nav">
-                <a href="inicial.html">
+                <a href="inicial.php">
                   <li class="nav-link" >Página Inicial</li>
                 </a>
-                <a href="cadastroCategoria.html">
+                <a href="cadastroCategoria.php">
                   <li class="nav-link">Categorias</li>
                 </a>
-                <a href="cadastroGrupo.html">
+                <a href="cadastroGrupo.php">
                   <li class="nav-link">Grupos</li>
                 </a>
-                <a href="cadastroQuestao.html">
+                <a href="cadastroQuestao.php">
                   <li class="nav-link">Perguntas</li>
                 </a>       
               </ul>
@@ -37,16 +54,65 @@
     </nav>
     <section class="cadastro">
         <h3>Cadastrar Categoria</h3>
-        <form class="mr-auto ml-auto" method="post">
-            <div class="input-group mb-3">
-                <input type="text" name="categoria" class="form-control" placeholder="Digite aqui" aria-label="Recipient's username"
-                    aria-describedby="basic-addon2" required>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit" name="acao">OK</button>
+        <?php
+        if (isset($_GET['acao']) && $_GET['acao'] == "deletar") {
+            $id = $_GET['id'];
+            $categoria->deletaCategoria($id);
+        }
+        if (isset($_GET['acao']) && $_GET['acao'] == "editar") {
+            $id = $_GET['id'];
+            $resultado = $categoria->buscaCategoria($id);
+
+        ?>
+            <form class="mr-auto ml-auto" method="post">
+                <div class="input-group mb-3">
+                    <input type="text" name="categoria" class="form-control" value="<?php echo $resultado[0]; ?>" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" name="atualizar">Atualizar</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        <?php } else { ?>
+            <form class="mr-auto ml-auto" method="post">
+                <div class="input-group mb-3">
+                    <input type="text" name="categoria" class="form-control" placeholder="Digite aqui" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" name="cadastrar">OK</button>
+                    </div>
+                </div>
+            </form>
+        <?php } ?>
     </section>
+    <div class="table-responsive-sm tabela">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+                $resultadoObjeto = new Categoria;
+                $resultado = $resultadoObjeto->selectCategoria();
+                foreach ($resultado as $key => $value) {
+                    echo '<tr>
+        <td>' . $value['idCategoria'] . '</td>
+        <td>' . $value['categoria'] . '</td>
+        <td>
+        <form method="get">
+        <a href="cadastroGrupo.php?acao=editar&id=' . $value['idCategoria'] . '"><img src="/ProjetoIntegrador/img/lapis.png" alt="editar" width=16 height=16></a>
+        <a href="cadastroGrupo.php?acao=deletar&id=' . $value['idCategoria'] . '"><img src="/ProjetoIntegrador/img/lixeira.png" alt="deletar" width=16 height=16></a>
+        </form>
+        </td>
+    </tr>';
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+
  <!--
     <div class="table-responsive-sm tabela">
         <table class="table">
