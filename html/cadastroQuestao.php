@@ -4,6 +4,12 @@ require_once '../php/model/Questao.php';
 
 $questao = new Questao();
 
+if (isset($_POST['cadastrar'])) {
+    $questao->setDescricao($_POST['descricao']);
+    $questao->setCategoria($_POST['categoria']);
+    $questao->setLegenda($_POST['legenda']);
+    $questao->insertQuestao();
+}
 ?>
 
 <!DOCTYPE html>
@@ -44,42 +50,52 @@ $questao = new Questao();
     </nav>
     <section class="cadastro">
         <h3>Cadastrar Questão</h3>
-
-        <div class="form-group formataSelect mr-auto ml-auto">
-            <select class="form-control selecionar" id="exampleFormControlSelect1">
-                <option selected disabled>Categoria</option>
-                <?php
-                $resultado = $questao->selectCategoria();
-                foreach ($resultado as $key => $value) {
-                    echo '<option>' . $value['categoria'] . '</option>';
-                }
-                ?>
-            </select>
-        </div>
-
-        <div class="form-group formataSelect mr-auto ml-auto">
-            <select class="form-control selecionar" id="exampleFormControlSelect1">
-                <option selected disabled>Grupo</option>
-                <?php
-                $resultado = $questao->selectLegenda();
-                foreach ($resultado as $key => $value) {
-                    echo '<option>' . $value['legenda'] . '</option>';
-                }
-                ?>
-            </select>
-        </div>
-
-        <form class="mr-auto ml-auto">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Digite aqui" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">OK</button>
-                </div>
+        <form method="post" class="ml-auto mr-auto">
+            <div class="input-group mb-3 formataSelect mr-auto ml-auto">
+                <select name="categoria" class="form-control selecionar select" id="exampleFormControlSelect1">
+                    <option selected disabled>Categoria</option>
+                    <?php
+                    $resultado = $questao->selectCategoria();
+                    foreach ($resultado as $key => $value) {
+                    ?>
+                        <option value="<?php echo $value['idCategoria']; ?>"><?php echo $value['categoria']; ?></option>
+                    <?php } ?>
+                </select>
             </div>
+            <div class="input-group mb-3 formataSelect mr-auto ml-auto">
+                <select name="legenda" class="form-control selecionar select" id="exampleFormControlSelect1">
+                    <option selected disabled>Grupo</option>
+                    <?php
+                    $resultado = $questao->selectLegenda();
+                    foreach ($resultado as $key => $value) {
+                    ?>
+                        <option value="<?php echo $value['idLegenda']; ?>"><?php echo $value['legenda']; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <form class="mr-auto ml-auto">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="descricao" placeholder="Digite aqui" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" name="cadastrar">OK</button>
+                    </div>
+                </div>
+            </form>
         </form>
     </section>
-
     <div class="table-responsive-sm tabela">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Grupo</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <!--
+        <div class="table-responsive-sm tabela">
         <table class="table">
             <thead class="thead-light">
                 <tr>
@@ -124,11 +140,11 @@ $questao = new Questao();
             </tbody>
         </table>
     </div>
+                -->
 
-
-    <script src="js/jquery-3.3.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+            <script src="js/jquery-3.3.1.slim.min.js"></script>
+            <script src="js/popper.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>
