@@ -1,6 +1,7 @@
 <?php
 
 require_once '../html/cadastroCategoria.php';
+
 require_once 'Conexao.php';
 
 

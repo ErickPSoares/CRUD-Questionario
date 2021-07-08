@@ -1,3 +1,10 @@
+<?php
+require_once '../php/model/Escolhe.php';
+
+$escolhe = new Escolhe();
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -19,16 +26,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSite">
       <ul class="navbar-nav">
-        <a href="inicial.html">
+        <a href="inicial.php">
           <li class="nav-link" >Página Inicial</li>
         </a>
-        <a href="cadastroCategoria.html">
+        <a href="cadastroCategoria.php">
           <li class="nav-link">Categorias</li>
         </a>
-        <a href="cadastroGrupo.html">
+        <a href="cadastroGrupo.php">
           <li class="nav-link">Grupos</li>
         </a>
-        <a href="cadastroQuestao.html">
+        <a href="cadastroQuestao.php">
           <li class="nav-link">Perguntas</li>
         </a>       
       </ul>
@@ -38,15 +45,17 @@
     <h3>Escolha a Categoria</h3>
   </section>
   <section class="conjuntoBotoes mr-auto ml-auto">
-    <div class="botoes">
-      <button type="button" class="botao">vem do banco</button>
-    </div>
-    <div class="botoes">
-      <button type="button" class="botao">vem do banco</button>
-    </div>
-    <div class="botoes">
-      <button type="button" class="botao">vem do banco</button>
-    </div>
+  <?php
+  $resultado = $escolhe->selectCategoria();
+  foreach($resultado as $key => $value){
+    echo 
+    '<div class="botoes">
+    <a href="questionario.php?id='.$value['idCategoria'].'" class="link">
+      <label class="botao">'.$value['categoria'].'</label>
+    </a>
+    </div>';
+  }
+  ?>
   </section>
 
 
