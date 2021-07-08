@@ -1,3 +1,21 @@
+<?php
+require_once '../php/model/Resultado.php';
+
+$objeto = new Resultado();
+$total = 0;
+if(isset($_POST['resultado'])){
+$idCategoria = $_GET['id'];
+$resultado = $objeto->selectIdPergunta($idCategoria);
+foreach($resultado as $key => $value){
+    $atual = $value['idPergunta'];
+    $auxiliar = $_POST["$atual"];
+    $total = $total + $auxiliar;
+    $objeto->setTotal($total);
+}
+$resul = $objeto->getTotal();
+echo $resul;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -19,74 +37,57 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSite">
             <ul class="navbar-nav">
-                <a href="inicial.html">
-                  <li class="nav-link" >Página Inicial</li>
+                <a href="inicial.php">
+                    <li class="nav-link">Página Inicial</li>
                 </a>
-                <a href="cadastroCategoria.html">
-                  <li class="nav-link">Categorias</li>
+                <a href="cadastroCategoria.php">
+                    <li class="nav-link">Categorias</li>
                 </a>
-                <a href="cadastroGrupo.html">
-                  <li class="nav-link">Grupos</li>
+                <a href="cadastroGrupo.php">
+                    <li class="nav-link">Grupos</li>
                 </a>
-                <a href="cadastroQuestao.html">
-                  <li class="nav-link">Perguntas</li>
-                </a>       
-              </ul>
+                <a href="cadastroQuestao.php">
+                    <li class="nav-link">Perguntas</li>
+                </a>
+            </ul>
         </div>
     </nav>
     <section>
         <h3>Marque uma opção para cada pergunta</h3>
-
-        <div class="pergunta ml-auto mr-auto">
-            <h6>Vem do banco</h6>
-        </div>
-        <div class="radios">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="" value="option1"
-                    checked>
-                <label class="form-check-label" for="exampleRadios1">
-                    Não
-                </label>
+        <form method="post">
+        <?php
+        $id = $_GET['id'];
+        $resultado = $objeto->selectQuestao($id);
+        foreach ($resultado as $key => $value) {
+            echo '        <div class="pergunta ml-auto mr-auto">
+                <h6>'.$value['descricao'].'</h6>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                    Ás vezes
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                    A maior parte das vezes
-                </label>
-            </div>
-        </div>
-        <div class="pergunta ml-auto mr-auto">
-            <h6>Vem do banco</h6>
-        </div>
-        <div class="radios">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="vemDoBanco" id="" value="option1"
-                    checked>
-                <label class="form-check-label" for="exampleRadios1">
-                    Não
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="vemDoBanco" id="" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                    Ás vezes
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="vemDoBanco" id="" value="option2">
-                <label class="form-check-label" for="exampleRadios2">
-                    A maior parte das vezes
-                </label>
-            </div>
-        </div>
-
-        <button type="button" class="btn btn-secondary btn-lg resultado">Resultado</button>
+            <div class="radios">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="'.$value['idPergunta'].'" id="" value="0"
+                        checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                        Não
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="'.$value['idPergunta'].'" id="" value="1">
+                    <label class="form-check-label" for="exampleRadios2">
+                        Ás vezes
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="'.$value['idPergunta'].'" id="" value="2">
+                    <label class="form-check-label" for="exampleRadios2">
+                        A maior parte das vezes
+                    </label>
+                </div>
+            </div>';
+        }
+        ?>
+        
+        <button type="submit" name="resultado" class="btn btn-secondary btn-lg resultado">Resultado</button>
+        </form>
 
         <script src="js/jquery-3.3.1.slim.min.js"></script>
         <script src="js/popper.min.js"></script>
