@@ -65,7 +65,7 @@ if (isset($_POST['atualizar'])) {
         ?>
             <form class="mr-auto ml-auto" method="post">
                 <div class="input-group mb-3">
-                    <input type="text" name="categoria" class="form-control" value="<?php echo $resultado[0]; ?>" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <input type="text" name="categoria" class="form-control" value="<?php echo $resultado[0]; ?>" aria-label="Recipient's username" aria-describedby="basic-addon2" required>
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit" name="atualizar">Atualizar</button>
                     </div>
@@ -74,7 +74,7 @@ if (isset($_POST['atualizar'])) {
         <?php } else { ?>
             <form class="mr-auto ml-auto" method="post">
                 <div class="input-group mb-3">
-                    <input type="text" name="categoria" class="form-control" placeholder="Digite aqui" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <input type="text" name="categoria" class="form-control" placeholder="Digite aqui" aria-label="Recipient's username" aria-describedby="basic-addon2" required>
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit" name="cadastrar">OK</button>
                     </div>
