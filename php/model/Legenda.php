@@ -8,6 +8,12 @@ class Legenda extends Conexao
 {
     private $legenda;
     private $idLegenda;
+    private $risco;
+
+    public function setRisco($risco)
+    {
+        $this->risco = $risco;
+    }
 
     public function setLegenda($legenda)
     {
@@ -27,9 +33,10 @@ class Legenda extends Conexao
     public function insertLegenda()
     {
         $pdo = $this->conexao();
-        $sql = $pdo->prepare("INSERT INTO `legenda` VALUES (NULL, teste) ");
+        $sql = $pdo->prepare("INSERT INTO `legenda` VALUES (NULL, ?, ?) ");
         $legenda = $this->legenda;
-        $sql->execute(array($legenda));
+        $risco = $this->risco;
+        $sql->execute(array($legenda,$risco));
     }
 
     public function selectLegenda()
@@ -50,13 +57,23 @@ class Legenda extends Conexao
         return $resultado;
     }
 
+    public function buscaRisco($id)
+    {
+        $pdo = $this->conexao();
+        $sql = $pdo->prepare("SELECT `risco` FROM legenda WHERE idLegenda = ?");
+        $sql->execute(array($id));
+        $resultado = $sql->fetch();
+        return $resultado;
+    }
+
     public function updateLegenda($id)
     {
         $legenda = $this->legenda;
+        $risco = $this->risco;
         $idLegenda = $id;
         $pdo = $this->conexao();
-        $sql = $pdo->prepare("UPDATE `legenda` SET legenda = ? WHERE idLegenda = ?");
-        $sql->execute(array($legenda, $idLegenda));
+        $sql = $pdo->prepare("UPDATE `legenda` SET legenda = ?, risco = ? WHERE idLegenda = ?");
+        $sql->execute(array($legenda,$risco ,$idLegenda));
     }
 
     public function deletaLegenda($id)

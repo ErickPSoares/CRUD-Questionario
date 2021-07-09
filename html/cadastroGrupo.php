@@ -6,11 +6,13 @@ $legenda = new Legenda();
 
 if (isset($_POST['cadastrar'])) {
     $legenda->setLegenda($_POST['legenda']);
+    $legenda->setRisco($_POST['risco']);
     $legenda->insertLegenda();
 }
 
 if (isset($_POST['atualizar'])) {
     $legenda->setLegenda($_POST['legenda']);
+    $legenda->setRisco($_POST['risco']);
     $id = $_GET['id'];
     $legenda->updateLegenda($id);
 }
@@ -61,25 +63,19 @@ if (isset($_POST['atualizar'])) {
         }
         if (isset($_GET['acao']) && $_GET['acao'] == "editar") {
             $id = $_GET['id'];
-            $resultado = $legenda->buscaLegenda($id);
-
+            $resultadoLegenda = $legenda->buscaLegenda($id);
+            $resultadoRisco = $legenda->buscaRisco($id);
         ?>
             <form class="mr-auto ml-auto" method="post">
-                <div class="input-group mb-3">
-                    <input type="text" name="legenda" class="form-control" value="<?php echo $resultado[0]; ?>" aria-label="Recipient's username" aria-describedby="basic-addon2" required>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" name="atualizar">Atualizar</button>
-                    </div>
-                </div>
+                <input type="text" name="legenda" class="form-control mb-3" value="<?php echo $resultadoLegenda[0]; ?>" placeholder="Grupo" aria-label="Recipient's username" aria-describedby="basic-addon2" required>
+                <input type="text" name="risco" class="form-control mb-3" value="<?php echo $resultadoRisco[0]; ?>" placeholder="Limite" aria-label="Recipient's username" aria-describedby="basic-addon2" required>
+                <button class="btn btn-outline-secondary cadastrar mb-3" type="submit" name="atualizar">Editar</button>
             </form>
         <?php } else { ?>
             <form class="mr-auto ml-auto" method="post">
-                <div class="input-group mb-3">
-                    <input type="text" name="legenda" class="form-control" placeholder="Digite aqui" aria-label="Recipient's username" aria-describedby="basic-addon2" required>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" name="cadastrar">OK</button>
-                    </div>
-                </div>
+                <input type="text" name="legenda" class="form-control mb-3" placeholder="Grupo" aria-label="Recipient's username" aria-describedby="basic-addon2" required>
+                <input type="text" name="risco" class="form-control mb-3" placeholder="Limite" aria-label="Recipient's username" aria-describedby="basic-addon2" required>
+                <button class="btn btn-outline-secondary cadastrar mb-3" type="submit" name="cadastrar">Cadastrar</button>
             </form>
         <?php } ?>
     </section>
@@ -89,6 +85,7 @@ if (isset($_POST['atualizar'])) {
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Grupo</th>
+                    <th scope="col">Limite</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -100,6 +97,7 @@ if (isset($_POST['atualizar'])) {
                     echo '<tr>
         <td>' . $value['idLegenda'] . '</td>
         <td>' . $value['legenda'] . '</td>
+        <td>' . $value['risco'] . '</td>
         <td>
         <form method="get">
         <a href="cadastroGrupo.php?acao=editar&id=' . $value['idLegenda'] . '"><img src="/ProjetoIntegrador/img/lapis.png" alt="editar" width=16 height=16></a>

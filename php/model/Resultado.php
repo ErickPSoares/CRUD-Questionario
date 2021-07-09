@@ -4,13 +4,9 @@ require_once 'Conexao.php';
 
 class Resultado extends Conexao
 {
-    private $total;
 
-    public function setTotal($total){
-        $this->total = $total;
-    }
-
-    public function getTotal(){
+    public function getTotal()
+    {
         return $this->total;
     }
 
@@ -22,6 +18,7 @@ class Resultado extends Conexao
         $resultado = $sql->fetchAll();
         return $resultado;
     }
+
     public function selectIdPergunta($id)
     {
         $pdo = $this->conexao();
@@ -29,5 +26,13 @@ class Resultado extends Conexao
         $sql->execute(array($id));
         $resultado = $sql->fetchAll();
         return $resultado;
+    }
+
+    public function selectRisco($id)
+    {
+        $pdo = $this->conexao();
+        $sql = $pdo->prepare("SELECT * FROM legenda WHERE idLegenda = ?");
+        $sql->execute(array($id));
+        return $sql->fetch();
     }
 }

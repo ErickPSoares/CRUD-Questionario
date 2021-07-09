@@ -1,21 +1,3 @@
-<?php
-require_once '../php/model/Resultado.php';
-
-$objeto = new Resultado();
-$total = 0;
-if(isset($_POST['resultado'])){
-$idCategoria = $_GET['id'];
-$resultado = $objeto->selectIdPergunta($idCategoria);
-foreach($resultado as $key => $value){
-    $atual = $value['idPergunta'];
-    $auxiliar = $_POST["$atual"];
-    $total = $total + $auxiliar;
-    $objeto->setTotal($total);
-}
-$resul = $objeto->getTotal();
-echo $resul;
-}
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -52,47 +34,77 @@ echo $resul;
             </ul>
         </div>
     </nav>
-    <section>
-        <h3>Marque uma opção para cada pergunta</h3>
-        <form method="post">
-        <?php
-        $id = $_GET['id'];
-        $resultado = $objeto->selectQuestao($id);
+    <?php
+    require_once '../php/model/Resultado.php';
+
+    $objeto = new Resultado();
+    $total = 0;
+    if (isset($_POST['resultado'])) {
+        $idCategoria = $_GET['id'];
+        $resultado = $objeto->selectIdPergunta($idCategoria);
         foreach ($resultado as $key => $value) {
-            echo '        <div class="pergunta ml-auto mr-auto">
-                <h6>'.$value['descricao'].'</h6>
+            $atual = $value['idPergunta'];
+            $auxiliar = $_POST["$atual"];
+            $total = $total + $auxiliar;
+        }
+        $id = $_GET['id'];
+        $risco = $objeto->selectRisco($id);
+        $risco = $risco['risco'];
+        if ($total >= $risco) {
+            $final = "Dentro do esperado";
+        } else {
+            $final = "Desenvolvimento em risco";
+        }
+    ?>
+        <?php
+        echo '<div class="ml-auto mr-auto resposta">
+<h1>' . $final . '</h1>
+</div>';
+        ?>
+    <?php } else { ?>
+        <section>
+            <h3>Marque uma opção para cada pergunta</h3>
+            <form method="post">
+                <?php
+                $id = $_GET['id'];
+                $resultado = $objeto->selectQuestao($id);
+                foreach ($resultado as $key => $value) {
+                    echo '        <div class="pergunta ml-auto mr-auto">
+                <h6>' . $value['descricao'] . '</h6>
             </div>
             <div class="radios">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="'.$value['idPergunta'].'" id="" value="0"
+                    <input class="form-check-input" type="radio" name="' . $value['idPergunta'] . '" id="" value="0"
                         checked>
                     <label class="form-check-label" for="exampleRadios1">
                         Não
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="'.$value['idPergunta'].'" id="" value="1">
+                    <input class="form-check-input" type="radio" name="' . $value['idPergunta'] . '" id="" value="1">
                     <label class="form-check-label" for="exampleRadios2">
                         Ás vezes
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="'.$value['idPergunta'].'" id="" value="2">
+                    <input class="form-check-input" type="radio" name="' . $value['idPergunta'] . '" id="" value="2">
                     <label class="form-check-label" for="exampleRadios2">
                         A maior parte das vezes
                     </label>
                 </div>
             </div>';
-        }
-        ?>
-        
-        <button type="submit" name="resultado" class="btn btn-secondary btn-lg resultado">Resultado</button>
-        </form>
+                }
+                ?>
+
+                <button type="submit" name="resultado" class="btn btn-secondary btn-lg resultado">Resultado</button>
+            </form>
+
+        <?php } ?>
 
         <script src="js/jquery-3.3.1.slim.min.js"></script>
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-    </section>
+        </section>
 </body>
 
 </html>
